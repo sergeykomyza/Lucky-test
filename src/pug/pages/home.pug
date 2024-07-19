@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+html(lang="ru")
+	head
+		include ./../sections/_head.pug
+		title Lucky Test
+	body
+
+		-
+			const tabs = [
+				{icon: 'img/svg/icon-1.svg', text: 'Услуги дизайна'},
+				{icon: 'img/svg/icon-2.svg', text: 'Изготовление <br> рекламной <br> продукции'},
+				{icon: 'img/svg/icon-3.svg', text: 'Изготовление <br> вывесок и флагов'},
+				{icon: 'img/svg/icon-4.svg', text: 'Прочие услуги'}
+			]
+		
+		main.wrapper 
+			section.production 
+				h1.title.production__title Изготовление
+				.production__tabs 
+					each item, i in tabs
+						.tab 
+							.tab__iconbox
+								img.tab__icon(src=`img/svg/icon-${i+1}.svg`, alt="@")
+							span.tab__text !{item.text}
+							.tab__btn
+								img.tab__btnicon(src="img/svg/icon-arrow.svg", alt="@")
+								img.tab__btnicon.tab__btnicon--active(src="img/svg/icon-close.svg", alt="@")
+
+				.production__contents
+					.tab-content 
+						.tab-content__inner
+							.tab-content__info
+								p.tab-content__text.text В штате нашего рекламного агентства трудятся только #[br] профессиональные дизайнеры. Макет разрабатывается #[br] с учетом индивидуальных особенностей и пожеланий клиента. #[br] Поможем разработать #[b.text-bold дизайн баннеров, вывесок, флагов а <br> также фирменный стиля и именную продукцию компании.]
+								span.tab-content__label Предоплата
+								ul.tab-content__list 
+									each item in ['Согласование стоимости работ','<b class="text-bold">50%</b> Предоплата','Приступаем к работе']
+										li.tab-content__item.text !{item}
+								span.tab-content__label Разработка и правки
+								ul.tab-content__list 
+									each item in ['Часовая ставка - <b class="text-bold">1200 р/час</b>','Один макет - <b class="text-bold">3000 р.</b>','<b class="text-bold">Одна</b> итерация правок <b>- 500 р.</b>']
+										li.tab-content__item.text !{item}
+								button.button.tab-content__order(data-popup="popup" data-src="#popup1") Заказать
+							.tab-content__slider.swiper.js-slider
+								.swiper-wrapper
+									each item in [1, 2, 3]
+										.swiper-slide 
+											.swiper-slide__inner
+												.swiper-slide__row
+													img(src="img/pic/pic-1.png", alt="@")
+													img(src="img/pic/pic-2.png", alt="@")
+												.swiper-slide__row.swiper-slide__row--transform
+													img(src="img/pic/pic-3.png", alt="@")
+													img(src="img/pic/pic-4.png", alt="@")
+								.swiper-navigation
+									button.swiper-button-prev
+										img(src="img/svg/icon-slider-arrow-prev.svg" alt="@")
+									button.swiper-button-next
+										img(src="img/svg/icon-slider-arrow-next.svg" alt="@")
+								.swiper-pagination
+
+					.tab-content Изготовление рекламной продукции
+					.tab-content Изготовление вывесок и флагов
+					.tab-content Прочие услуги
+
+			include ./../sections/_contacts.pug
+
+		#popup1.popup
+			.popup__body.animate__animated
+				button.popup__close.js-popupClose 
+					img(src="img/svg/icon-close.svg", alt="@")
+				.popup__form
+					include ./../sections/_form.pug
+		
+		include ./../sections/_scripts.pug

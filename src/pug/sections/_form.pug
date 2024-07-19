@@ -1,0 +1,16 @@
+form.form(action="#")
+  h3.form__title Заказать звонок 
+  .form__fields
+    .form__field
+      input.form__input(type="text" name="name" placeholder="Имя")
+      span.form__hint Введите имя 
+    .form__field
+      input.form__input.js-maskPhone(type="text" name="phone" placeholder="Номер телефона")
+      span.form__hint Введите номер телефона
+  label.form-agree 
+    input.form-agree__input(type="checkbox" checked)
+    span.form-agree__check
+      svg(width='18' height='13' viewbox='0 0 18 13' fill='none' xmlns='http://www.w3.org/2000/svg')
+        path(d='M17 1L6 12L1 7' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round')
+    span.form-agree__text Согласие на обработку персональных данных
+  button.button.form-agree__order Отправить
