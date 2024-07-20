@@ -189,6 +189,12 @@ const tabs = (headerSelector, tabSelector, contentSelector, activeClass) => {
               (target.classList.contains(tabSelector.replace(/\./,"")) ||  target.parentNode.classList.contains(tabSelector.replace(/\./,"")))){
               tab.forEach((item, i) => {
                   if(target == item || target.parentNode == item){
+                        if(document.documentElement.clientWidth < 768){
+                            window.scrollBy({
+                                top: document.querySelector('.production__contents').getBoundingClientRect().top, 
+                                behavior: "smooth" 
+                            });
+                        }
                       hideContent();
                       showContent(i);
                   }

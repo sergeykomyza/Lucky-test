@@ -149,13 +149,30 @@ input, textarea{
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 .wrapper{
 	padding: 95px 80px;
+	transition: all .3s ease;
+	animation: showWrapper 1s ease;
 	@media(max-width: 992px){
 		padding: 50px 15px;
 	}
 }
 
+@keyframes showWrapper{
+	0%{
+		opacity: 0;
+		transform: translateY(100px)
+	}
+	100%{
+		opacity: 1;
+		transform: translateY(0px)
+	}
+}
+
 .production{
 	margin-bottom: 88px;
+	padding-right: 160px;
+	@media(max-width: 1400px){
+		padding-right: 0px;
+	}
 	@media(max-width: 768px){
 		margin-bottom: 50px;
 	}
