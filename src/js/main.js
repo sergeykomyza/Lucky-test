@@ -17,52 +17,6 @@ const sliders = () => {
 
 }
 
-// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ КАРТА, ОТЛОЖЕННАЯ ЗАГРУЗКА (ЧТОБЫ УЛУЧШИТЬ ПОКАЗАТЕЛИ - PageSpeed Insights)
-const map = () => {
-
-    setTimeout(function() {
-        var headID = document.getElementsByTagName("body")[0];         
-        var newScript = document.createElement('script');
-        newScript.type = 'text/javascript';
-        newScript.src = 'https://api-maps.yandex.ru/2.1/?lang=ru_RU';
-        headID.appendChild(newScript);
-    }, 3000);
-    setTimeout(function() {
-            var myMap = new ymaps.Map("map", {
-            center: [55.917879, 37.806326],
-            zoom: 13,
-            controls: ['smallMapDefaultSet']
-        }, {
-            searchControlProvider: 'yandex#search'
-        });
-
-        myGeoObject = new ymaps.GeoObject({
-            geometry: {
-                type: "Point"
-            },
-        });
-        myMap.geoObjects
-            .add(myGeoObject)
-            .add(new ymaps.Placemark([55.917879, 37.806326], {
-                balloonContent: '<strong></strong>',
-                iconCaption: 'М.О., г. Королев, ул. Ленина 12'
-            }, {
-                preset: 'islands#blueCircleDotIconWithCaption',
-                iconCaptionMaxWidth: '200'
-            }));
-
-        myMap.setType('yandex#publicMap');
-
-        myMap.behaviors.disable('scrollZoom');
-        //на мобильных устройствах... (проверяем по userAgent браузера)
-        if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
-            //... отключаем перетаскивание карты
-            myMap.behaviors.disable('drag');
-        }
-    }, 4000);
-
-}
-
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ POPUP
 const popup = ()=> {
     const popup = document.querySelectorAll('.popup')
@@ -95,14 +49,13 @@ const popup = ()=> {
     })
 }
 
-
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ FORM
 const formValidation = () => {
     function setCursorPosition(pos, elem) {
         elem.focus();
         if (elem.setSelectionRange) elem.setSelectionRange(pos, pos);
         else if (elem.createTextRange) {
-            var range = elem.createTextRange();
+            let range = elem.createTextRange();
             range.collapse(true);
             range.moveEnd("character", pos);
             range.moveStart("character", pos);
@@ -164,42 +117,41 @@ const formValidation = () => {
 
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ TABS
 const services = ()=> {
-
-const tabs = document.querySelectorAll('.tab')
-const contents = document.querySelectorAll('.tab-content')
-contents.forEach(item => {
-    item.style.display = 'none'
-})
-function removeActive(){
-    tabs.forEach(item => {
-        item.classList.remove('active')
+    const tabs = document.querySelectorAll('.tab')
+    const contents = document.querySelectorAll('.tab-content')
+    contents.forEach(item => {
+        item.style.display = 'none'
     })
-}
-tabs[0].classList.add('active')
-contents[0].style.display = 'block'
-document.querySelector('.production__tabs').addEventListener('click', function(e){
-    const tab = e.target.closest('.tab')
-    if(tab){
-        let attrVal = tab.dataset.tab
-        if(tab && tab.classList.contains('active')){
-            contents.forEach(item => {
-                item.style.display = "none"
-            })
-            removeActive()
-            tab.classList.remove('active')
-        } else{
-            contents.forEach(item => {
-                if(item.id == attrVal){
-                    item.style.display = "block"
-                } else {
+    function removeActive(){
+        tabs.forEach(item => {
+            item.classList.remove('active')
+        })
+    }
+    tabs[0].classList.add('active')
+    contents[0].style.display = 'block'
+    document.querySelector('.production__tabs').addEventListener('click', function(e){
+        const tab = e.target.closest('.tab')
+        if(tab){
+            let attrVal = tab.dataset.tab
+            if(tab && tab.classList.contains('active')){
+                contents.forEach(item => {
                     item.style.display = "none"
-                }
-            })
-            removeActive()
-            tab.classList.add('active')
-        }
-    } 
-})
+                })
+                removeActive()
+                tab.classList.remove('active')
+            } else{
+                contents.forEach(item => {
+                    if(item.id == attrVal){
+                        item.style.display = "block"
+                    } else {
+                        item.style.display = "none"
+                    }
+                })
+                removeActive()
+                tab.classList.add('active')
+            }
+        } 
+    })
 }
 
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~ INIT
