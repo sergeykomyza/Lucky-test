@@ -18,7 +18,7 @@ html(lang="ru")
 				h1.title.production__title Изготовление
 				.production__tabs 
 					each item, i in tabs
-						.tab 
+						.tab(data-tab=`content-${i+1}`)
 							.tab__iconbox
 								img.tab__icon(src=`img/svg/icon-${i+1}.svg`, alt="@")
 							span.tab__text !{item.text}
@@ -27,7 +27,7 @@ html(lang="ru")
 								img.tab__btnicon.tab__btnicon--active(src="img/svg/icon-close.svg", alt="@")
 
 				.production__contents
-					.tab-content 
+					#content-1.tab-content 
 						.tab-content__inner
 							.tab-content__info
 								p.tab-content__text.text В штате нашего рекламного агентства трудятся только #[br] профессиональные дизайнеры. Макет разрабатывается #[br] с учетом индивидуальных особенностей и пожеланий клиента. #[br] Поможем разработать #[b.text-bold дизайн баннеров, вывесок, флагов а <br> также фирменный стиля и именную продукцию компании.]
@@ -58,9 +58,9 @@ html(lang="ru")
 										img(src="img/svg/icon-slider-arrow-next.svg" alt="@")
 								.swiper-pagination
 
-					.tab-content Изготовление рекламной продукции
-					.tab-content Изготовление вывесок и флагов
-					.tab-content Прочие услуги
+					#content-2.tab-content Изготовление рекламной продукции
+					#content-3.tab-content Изготовление вывесок и флагов
+					#content-4.tab-content Прочие услуги
 
 			include ./../sections/_contacts.pug
 

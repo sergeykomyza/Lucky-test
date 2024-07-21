@@ -163,55 +163,47 @@ const formValidation = () => {
 }
 
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ TABS
-const tabs = (headerSelector, tabSelector, contentSelector, activeClass) => {
-    const header = document.querySelector(headerSelector),
-          tab = document.querySelectorAll(tabSelector),
-          content = document.querySelectorAll(contentSelector);
-    
-    function hideContent(){
-      content.forEach(item => {
-        item.style.display = 'none';
-      });
-      tab.forEach(item => {
-        item.classList.remove(activeClass);
-      });
-    }
-    
-    function showContent(i){
-      content[i].style.display = 'block';
-      tab[i].classList.add(activeClass);
-    }
-    
-    header.addEventListener('click', (e) => {
-      e.preventDefault();
-      const target = e.target.closest(tabSelector);
-      if( target &&
-              (target.classList.contains(tabSelector.replace(/\./,"")) ||  target.parentNode.classList.contains(tabSelector.replace(/\./,"")))){
-              tab.forEach((item, i) => {
-                  if(target == item || target.parentNode == item){
-                        if(document.documentElement.clientWidth < 768){
-                            window.scrollBy({
-                                top: document.querySelector('.production__contents').getBoundingClientRect().top, 
-                                behavior: "smooth" 
-                            });
-                        }
-                      hideContent();
-                      showContent(i);
-                  }
-              });
-          }
-    });
-  
-    hideContent();
-    showContent(0); 
-    
+const services = ()=> {
+
+const tabs = document.querySelectorAll('.tab')
+const contents = document.querySelectorAll('.tab-content')
+contents.forEach(item => {
+    item.style.display = 'none'
+})
+function removeActive(){
+    tabs.forEach(item => {
+        item.classList.remove('active')
+    })
+}
+tabs[0].classList.add('active')
+contents[0].style.display = 'block'
+document.querySelector('.production__tabs').addEventListener('click', function(e){
+    const tab = e.target.closest('.tab')
+    if(tab){
+        let attrVal = tab.dataset.tab
+        if(tab && tab.classList.contains('active')){
+            contents.forEach(item => {
+                item.style.display = "none"
+            })
+            removeActive()
+            tab.classList.remove('active')
+        } else{
+            contents.forEach(item => {
+                if(item.id == attrVal){
+                    item.style.display = "block"
+                } else {
+                    item.style.display = "none"
+                }
+            })
+            removeActive()
+            tab.classList.add('active')
+        }
+    } 
+})
 }
 
-  
-  
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~ INIT
-// inputMask()
 formValidation()
-tabs('.production__tabs', '.tab', '.tab-content', 'active');
 sliders()
 popup()
+services()
